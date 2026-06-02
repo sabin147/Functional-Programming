@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "hLG9vKZoMDA=",
+  "success": true,
+  "projectFilePath": "/Users/sabinghimire/Documents/study/5th Semester(Math2,Nonlinear Dynamics,F#)/mp/mp.fsproj",
+  "expectedPackageFiles": [
+    "/Users/sabinghimire/.nuget/packages/fsharp.core/10.0.102/fsharp.core.10.0.102.nupkg.sha512",
+    "/Users/sabinghimire/.nuget/packages/fslexyacc/10.2.0/fslexyacc.10.2.0.nupkg.sha512",
+    "/Users/sabinghimire/.nuget/packages/fslexyacc.runtime/10.2.0/fslexyacc.runtime.10.2.0.nupkg.sha512",
+    "/Users/sabinghimire/.nuget/packages/microsoft.netcore.app.ref/8.0.23/microsoft.netcore.app.ref.8.0.23.nupkg.sha512",
+    "/Users/sabinghimire/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.23/microsoft.aspnetcore.app.ref.8.0.23.nupkg.sha512",
+    "/Users/sabinghimire/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.23/microsoft.netcore.app.host.osx-arm64.8.0.23.nupkg.sha512"
+  ],
+  "logs": []
+}
