@@ -1,11 +1,6 @@
 ```markdown
 # Functional Language Compiler & Virtual Machine
 
-[![F#](https://img.shields.io/badge/F%23-5.0-%23B845FC)](https://fsharp.org/)
-[![.NET](https://img.shields.io/badge/.NET-6.0-blue)](https://dotnet.microsoft.com/)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://dotnet.microsoft.com/)
-[![License](https://img.shields.io/badge/license-Academic%20Use%20Only-yellow)]()
-
 A complete compiler and virtual machine implementation for a custom functional programming language, developed for the **Functional Programming and Language Implementations (FPLI)** course at Roskilde University.
 
 **Core Achievement:** Bridges high-level functional source code with low-level stack-machine execution through a complete compilation pipeline – from parsing to bytecode generation to execution.
@@ -45,7 +40,7 @@ This project implements a **custom functional programming language** through thr
 | **Virtual Machine** | Bytecode execution | Stack-based architecture with 20+ instructions |
 | **Interpreter** | Direct evaluation | Dynamically-typed runtime with pattern matching |
 
-The language supports:
+**The language supports:**
 - Arithmetic expressions (`+`, `-`, `*`, `/`, `%`)
 - Boolean logic (`&&`, `||`, `==`, `!=`, `<`, `<=`, `>`, `>=`)
 - Control flow (`if-then-else`)
@@ -56,19 +51,26 @@ The language supports:
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    Source[Source Code string] --> Lexer[FsLex Lexer]
-    Lexer --> Tokens[Token stream]
-    Tokens --> Parser[FsYacc Parser]
-    Parser --> AST[AST: Expr Discriminated Union]
-    AST --> Compiler[Compiler.fs<br/>Pattern Matching + Environment]
-    Compiler --> Bytecode[Bytecode int array]
-    Bytecode --> VM[VM.dll Stack Machine]
-    VM --> Result[Result Value]
-    
-    AST -.-> Interpreter[Interpreter.fs<br/>Direct Evaluation]
-    Interpreter -.-> Result
+```
+Source Code (string)
+       ↓
+  [FsLex Lexer]
+       ↓
+  Token stream
+       ↓
+  [FsYacc Parser]
+       ↓
+  AST (Expr Discriminated Union)
+       ↓
+  [Compiler.fs - Pattern Matching + Environment]
+       ↓
+  Bytecode (int array)
+       ↓
+  [VM.dll Stack Machine]
+       ↓
+  Result Value
+
+  (Interpreter.fs provides an alternative direct evaluation path)
 ```
 
 **Design Philosophy:** Each phase is a pure function – input transformed to output without mutation. No global state, no side effects except explicit I/O.
@@ -78,23 +80,26 @@ flowchart TD
 ## Features
 
 ### Language Features
+
 | Category | Features |
 |----------|----------|
 | **Types** | `int`, `bool`, `unit` with dynamic type checking |
 | **Arithmetic** | `+`, `-`, `*`, `/`, `%`, unary negation |
 | **Comparisons** | `==`, `!=`, `<`, `<=`, `>`, `>=` |
-| **Logic** | `&&`, `\|\|` (short-circuited) |
+| **Logic** | `&&`, `||` (short-circuited) |
 | **Control Flow** | `if-then-else` expressions |
 | **Functions** | First-order, multi-argument (0 to N parameters) |
 | **I/O** | `read` (console input), `write` (console output) |
 
 ### Compiler Features
+
 - ✅ AST to bytecode mapping for all language constructs
 - ✅ Environment management (symbol → stack offset tracking)
 - ✅ Short-circuit optimization using jump labels (`ILAB`, `IJMPIF`)
 - ✅ Standardized calling convention for function calls
 
 ### Virtual Machine Features
+
 - ✅ Stack architecture for expression evaluation
 - ✅ Unconditional and conditional jumps
 - ✅ Function calls with return address management
@@ -152,6 +157,7 @@ Functional-Programming/
 ## Quick Start
 
 ### Prerequisites
+
 ```bash
 # Check .NET installation
 dotnet --version   # Requires 6.0 or later
@@ -161,6 +167,7 @@ dotnet tool install --global FsLexYacc
 ```
 
 ### Clone & Build
+
 ```bash
 git clone https://github.com/sabin147/Functional-Programming.git
 cd Functional-Programming
@@ -168,6 +175,7 @@ dotnet build
 ```
 
 ### Run in F# Interactive
+
 ```bash
 dotnet fsi
 ```
@@ -222,7 +230,7 @@ Main.test @"
 | Type | Literals | Operations |
 |------|----------|------------|
 | `int` | `0`, `-5`, `42` | `+`, `-`, `*`, `/`, `%`, unary `-` |
-| `bool` | `true`, `false` | `&&`, `\|\|`, `==`, `!=`, `<`, `<=`, `>`, `>=` |
+| `bool` | `true`, `false` | `&&`, `||`, `==`, `!=`, `<`, `<=`, `>`, `>=` |
 | `unit` | `()` | Return type of `write` and no-arg functions |
 
 ### Grammar (Simplified)
@@ -248,18 +256,20 @@ expr       = int | bool | name
 | 3 | `+`, `-` | Left |
 | 4 | `==`, `!=`, `<`, `<=`, `>`, `>=` | Left |
 | 5 | `&&` | Left |
-| 6 | `\|\|` | Left |
+| 6 | `||` | Left |
 
 ---
 
 ## Compilation Example
 
 ### Input Program
+
 ```
 (5 + 3) * 2
 ```
 
 ### Phase 1: Parsing → AST
+
 ```
 Mul(Add(Int 5, Int 3), Int 2)
 ```
@@ -276,11 +286,13 @@ Mul(Add(Int 5, Int 3), Int 2)
 | 6 | `IHALT` | `[16]` | Halt with result |
 
 ### Phase 3: Assembly → Bytecode
+
 ```
 [273, 5, 273, 3, 289, 273, 2, 290, 257]
 ```
 
 ### Phase 4: VM Execution
+
 ```
 Executed 6 instructions.
 Result = 16
@@ -468,16 +480,19 @@ VM.exec (Asm.asm ins)
 ## Building & Testing
 
 ### Build Project
+
 ```bash
 dotnet build
 ```
 
 ### Run Full Test Suite
+
 ```bash
 dotnet run -- test-all
 ```
 
 ### Manual Testing in F# Interactive
+
 ```fsharp
 #load "main.fsx"
 
@@ -497,7 +512,7 @@ Main.testInterp "factorial 5"
 | Hand-in | Deadline | Features to Implement |
 |---------|----------|----------------------|
 | Part 1 | Week 4 | Constants `true`/`false`, operators `- * / %`, unary `-`, comparisons (`== != < <= > >=`), `if` expressions |
-| Part 2 | Week 5 | `&&`, `\|\|`, `read`, `write` |
+| Part 2 | Week 5 | `&&`, `||`, `read`, `write` |
 | Part 3 | Week 6 | Multi-argument functions (0 or 2+ arguments) |
 
 ---
@@ -507,6 +522,7 @@ Main.testInterp "factorial 5"
 This project was developed for the **Functional Programming and Language Implementations (FPLI)** course at Roskilde University (Spring 2026).
 
 ### Course Focus
+
 - Principles of language engineering
 - Structural recursion on abstract syntax
 - Virtual machine architecture
@@ -593,7 +609,7 @@ let lookup name env = List.findIndex (fun n -> n = name) env
 | **Discriminated Union** | F# type with multiple labelled cases (e.g., `Int of int \| Add of Expr * Expr`) |
 | **Pattern Matching** | Deconstructing values and branching by their structure using `match` |
 | **Calling Convention** | Protocol for function calls (argument order, who cleans up, return address handling) |
-| **Short-Circuit** | `&&` and `\|\|` that skip evaluating the second operand when the first determines the result |
+| **Short-Circuit** | `&&` and `||` that skip evaluating the second operand when the first determines the result |
 | **Environment** | Mapping from variable names to stack offsets (compile-time) |
 | **Stack Frame** | Region of stack containing arguments, locals, and return address for a function call |
 | **First-order Function** | Function that cannot be passed as argument or returned (contrast with higher-order) |
@@ -637,3 +653,6 @@ let lookup name env = List.findIndex (fun n -> n = name) env
 This project was developed as coursework for the FPLI course at Roskilde University.  
 For academic use only. Please contact the course instructor before reusing or redistributing.
 ```
+
+---
+
