@@ -505,14 +505,6 @@ Main.test "factorial 5"
 Main.testInterp "factorial 5"
 ```
 
-### Partial Hand-ins (Course Requirements)
-
-| Hand-in | Deadline | Features to Implement |
-|---------|----------|----------------------|
-| Part 1 | Week 4 | Constants `true`/`false`, operators `- * / %`, unary `-`, comparisons (`== != < <= > >=`), `if` expressions |
-| Part 2 | Week 5 | `&&`, `||`, `read`, `write` |
-| Part 3 | Week 6 | Multi-argument functions (0 or 2+ arguments) |
-
 ---
 
 ## Academic Context
