@@ -1,4 +1,3 @@
-```markdown
 # Functional Language Compiler & Virtual Machine
 
 A complete compiler and virtual machine implementation for a custom functional programming language, developed for the **Functional Programming and Language Implementations (FPLI)** course at Roskilde University.
@@ -50,7 +49,6 @@ This project implements a **custom functional programming language** through thr
 ---
 
 ## Architecture
-
 ```
 Source Code (string)
        ↓
